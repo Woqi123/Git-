@@ -1,0 +1,112 @@
+<html>
+<head>
+  <title>版本控制与git简介</title>
+  <basefont face="微软雅黑" size="2" />
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  <meta name="exporter-version" content="YXBJ Windows/601535 (zh-CN, DDL); Windows/10.0.0 (Win64); EDAMVersion=V2;"/>
+  <meta name="content-class" content="yinxiang.markdown"/>
+  <style>
+    body, td {
+      font-family: 微软雅黑;
+      font-size: 10pt;
+    }
+  </style>
+</head>
+<body>
+<a name="3061"/>
+<h1>版本控制与git简介</h1>
+
+<div><span><div style="font-size: 14px; margin: 0; padding: 0; width: 100%;"><div style="line-height: 160%; box-sizing: content-box;"><ul style="line-height: 160%; box-sizing: content-box; display: block; list-style-type: disc; padding-left: 30px; margin: 6px 0 10px; color: #333;"><li style="line-height: 160%; box-sizing: content-box; position: relative;"><a style="line-height: 160%; box-sizing: content-box; text-decoration: underline; color: #5286bc;">版本控制具应该具备的功能
+</a><ul style="line-height: 160%; box-sizing: content-box; display: block; list-style-type: disc; padding-left: 30px; margin: 6px 0 10px; color: #333; margin-top: 0; margin-bottom: 0;"><li style="line-height: 160%; box-sizing: content-box; position: relative;"><a style="line-height: 160%; box-sizing: content-box; text-decoration: underline; color: #5286bc;">版本控制简介
+</a><ul style="line-height: 160%; box-sizing: content-box; display: block; list-style-type: disc; padding-left: 30px; margin: 6px 0 10px; color: #333; margin-top: 0; margin-bottom: 0;"><li style="line-height: 160%; box-sizing: content-box; position: relative;"><a style="line-height: 160%; box-sizing: content-box; text-decoration: underline; color: #5286bc;">版本控制
+</a></li><li style="line-height: 160%; box-sizing: content-box; position: relative;"><a style="line-height: 160%; box-sizing: content-box; text-decoration: underline; color: #5286bc;">版本控制工具
+</a></li></ul></li></ul></li><li style="line-height: 160%; box-sizing: content-box; position: relative;"><a style="line-height: 160%; box-sizing: content-box; text-decoration: underline; color: #5286bc;">Git 简介
+</a><ul style="line-height: 160%; box-sizing: content-box; display: block; list-style-type: disc; padding-left: 30px; margin: 6px 0 10px; color: #333; margin-top: 0; margin-bottom: 0;"><li style="line-height: 160%; box-sizing: content-box; position: relative;"><a style="line-height: 160%; box-sizing: content-box; text-decoration: underline; color: #5286bc;">Git简介
+</a></li><li style="line-height: 160%; box-sizing: content-box; position: relative;"><a style="line-height: 160%; box-sizing: content-box; text-decoration: underline; color: #5286bc;">Git官网和 Logo
+</a></li><li style="line-height: 160%; box-sizing: content-box; position: relative;"><a style="line-height: 160%; box-sizing: content-box; text-decoration: underline; color: #5286bc;">Git的优势
+</a></li><li style="line-height: 160%; box-sizing: content-box; position: relative;"><a style="line-height: 160%; box-sizing: content-box; text-decoration: underline; color: #5286bc;">Git 结构
+</a></li><li style="line-height: 160%; box-sizing: content-box; position: relative;"><a style="line-height: 160%; box-sizing: content-box; text-decoration: underline; color: #5286bc;">Git和代码托管中心
+</a></li><li style="line-height: 160%; box-sizing: content-box; position: relative;"><a style="line-height: 160%; box-sizing: content-box; text-decoration: underline; color: #5286bc;">本地库与远程库
+</a></li></ul></li></ul></div><h1 style="line-height: 160%; box-sizing: content-box; font-weight: 700; font-size: 41px; border-bottom: 3px double #999; color: #000; margin-top: 14px;">版本控制具应该具备的功能</h1>
+<ul style="line-height: 160%; box-sizing: content-box; display: block; list-style-type: disc; padding-left: 30px; margin: 6px 0 10px; color: #333;">
+<li style="line-height: 160%; box-sizing: content-box; position: relative;"><strong style="line-height: 160%; box-sizing: content-box; font-weight: 700;">协同修改</strong>
+<ul style="line-height: 160%; box-sizing: content-box; display: block; list-style-type: disc; padding-left: 30px; margin: 6px 0 10px; color: #333; margin-top: 0; margin-bottom: 0;">
+<li style="line-height: 160%; box-sizing: content-box; position: relative;">多人并行不悖的修改服务器端的同一个文件。</li>
+</ul>
+</li>
+<li style="line-height: 160%; box-sizing: content-box; position: relative;"><strong style="line-height: 160%; box-sizing: content-box; font-weight: 700;">数据备份</strong>
+<ul style="line-height: 160%; box-sizing: content-box; display: block; list-style-type: disc; padding-left: 30px; margin: 6px 0 10px; color: #333; margin-top: 0; margin-bottom: 0;">
+<li style="line-height: 160%; box-sizing: content-box; position: relative;">不仅保存目录和文件的当前状态，还能够保存每一个提交过的历史状态。</li>
+</ul>
+</li>
+<li style="line-height: 160%; box-sizing: content-box; position: relative;"><strong style="line-height: 160%; box-sizing: content-box; font-weight: 700;">版本管理</strong>
+<ul style="line-height: 160%; box-sizing: content-box; display: block; list-style-type: disc; padding-left: 30px; margin: 6px 0 10px; color: #333; margin-top: 0; margin-bottom: 0;">
+<li style="line-height: 160%; box-sizing: content-box; position: relative;">在保存每一个版本的文件信息的时候要做到不保存重复数据，以节约存储空 间，提高运行效率。这方面 SVN 采用的是增量式管理的方式，而 Git 采取了文件系统快照的方式。</li>
+</ul>
+</li>
+<li style="line-height: 160%; box-sizing: content-box; position: relative;">权限控制
+<ul style="line-height: 160%; box-sizing: content-box; display: block; list-style-type: disc; padding-left: 30px; margin: 6px 0 10px; color: #333; margin-top: 0; margin-bottom: 0;">
+<li style="line-height: 160%; box-sizing: content-box; position: relative;">对团队中参与开发的人员进行权限控制。</li>
+<li style="line-height: 160%; box-sizing: content-box; position: relative;">对团队外开发者贡献的代码进行审核——Git 独有。</li>
+</ul>
+</li>
+<li style="line-height: 160%; box-sizing: content-box; position: relative;">分支管理
+<ul style="line-height: 160%; box-sizing: content-box; display: block; list-style-type: disc; padding-left: 30px; margin: 6px 0 10px; color: #333; margin-top: 0; margin-bottom: 0;">
+<li style="line-height: 160%; box-sizing: content-box; position: relative;">允许开发团队在工作过程中多条生产线同时推进任务，进一步提高效率。</li>
+</ul>
+</li>
+</ul>
+<h2 style="line-height: 160%; box-sizing: content-box; font-weight: 700; font-size: 34px; border-bottom: 1px solid #dbdbdb; color: #333;">版本控制简介</h2>
+<h4 style="line-height: 160%; box-sizing: content-box; font-size: 20px; color: #333;">版本控制</h4>
+<p style="line-height: 160%; box-sizing: content-box; margin: 10px 0; color: #333;">工程设计领域中使用版本控制管理工程蓝图的设计过程。在 IT 开发过程中也可以 使用版本控制思想管理代码的版本迭代。</p>
+<h4 style="line-height: 160%; box-sizing: content-box; font-size: 20px; color: #333;">版本控制工具</h4>
+<ul style="line-height: 160%; box-sizing: content-box; display: block; list-style-type: disc; padding-left: 30px; margin: 6px 0 10px; color: #333;">
+<li style="line-height: 160%; box-sizing: content-box; position: relative;">集中式版本控制工具：CVS、SVN、VSS……<br/>
+<img src="版本控制与git简介_files/Image.png" type="image/png" data-filename="Image.png"/></li>
+<li style="line-height: 160%; box-sizing: content-box; position: relative;">分布式版本控制工具： Git、Mercurial、Bazaar、Darcs……<br/>
+<img src="版本控制与git简介_files/Image [1].png" type="image/png" data-filename="Image.png"/></li>
+</ul>
+<h1 style="line-height: 160%; box-sizing: content-box; font-weight: 700; font-size: 41px; border-bottom: 3px double #999; color: #000;">Git 简介</h1>
+<h4 style="line-height: 160%; box-sizing: content-box; font-size: 20px; color: #333;">Git简介</h4>
+<p style="line-height: 160%; box-sizing: content-box; margin: 10px 0; color: #333;"><img src="版本控制与git简介_files/Image [2].png" type="image/png" data-filename="Image.png"/></p>
+<h4 style="line-height: 160%; box-sizing: content-box; font-size: 20px; color: #333;">Git官网和 Logo</h4>
+<p style="line-height: 160%; box-sizing: content-box; margin: 10px 0; color: #333;">官网地址：https://git-scm.com/<br/>
+<img src="版本控制与git简介_files/Image [3].png" type="image/png" data-filename="Image.png"/></p>
+<h4 style="line-height: 160%; box-sizing: content-box; font-size: 20px; color: #333;">Git的优势</h4>
+<ul style="line-height: 160%; box-sizing: content-box; display: block; list-style-type: disc; padding-left: 30px; margin: 6px 0 10px; color: #333;">
+<li style="line-height: 160%; box-sizing: content-box; position: relative;">大部分操作在本地完成，不需要联网</li>
+<li style="line-height: 160%; box-sizing: content-box; position: relative;">完整性保证</li>
+<li style="line-height: 160%; box-sizing: content-box; position: relative;">尽可能添加数据而不是删除或修改数据</li>
+<li style="line-height: 160%; box-sizing: content-box; position: relative;">分支操作非常快捷流畅</li>
+<li style="line-height: 160%; box-sizing: content-box; position: relative;">与 Linux 命令全面兼容</li>
+</ul>
+<h4 style="line-height: 160%; box-sizing: content-box; font-size: 20px; color: #333;">Git 结构</h4>
+<p style="line-height: 160%; box-sizing: content-box; margin: 10px 0; color: #333;"><img src="版本控制与git简介_files/Image [4].png" type="image/png" data-filename="Image.png"/></p>
+<h4 style="line-height: 160%; box-sizing: content-box; font-size: 20px; color: #333;">Git和代码托管中心</h4>
+<p style="line-height: 160%; box-sizing: content-box; margin: 10px 0; color: #333;">代码托管中心的任务：维护远程库</p>
+<ul style="line-height: 160%; box-sizing: content-box; display: block; list-style-type: disc; padding-left: 30px; margin: 6px 0 10px; color: #333;">
+<li style="line-height: 160%; box-sizing: content-box; position: relative;"><strong style="line-height: 160%; box-sizing: content-box; font-weight: 700;">局域网环境下</strong>
+<ul style="line-height: 160%; box-sizing: content-box; display: block; list-style-type: disc; padding-left: 30px; margin: 6px 0 10px; color: #333; margin-top: 0; margin-bottom: 0;">
+<li style="line-height: 160%; box-sizing: content-box; position: relative;">GitLab 服务器</li>
+</ul>
+</li>
+<li style="line-height: 160%; box-sizing: content-box; position: relative;"><strong style="line-height: 160%; box-sizing: content-box; font-weight: 700;">外网环境下</strong>
+<ul style="line-height: 160%; box-sizing: content-box; display: block; list-style-type: disc; padding-left: 30px; margin: 6px 0 10px; color: #333; margin-top: 0; margin-bottom: 0;">
+<li style="line-height: 160%; box-sizing: content-box; position: relative;">GitHub</li>
+<li style="line-height: 160%; box-sizing: content-box; position: relative;">码云</li>
+</ul>
+</li>
+</ul>
+<h4 style="line-height: 160%; box-sizing: content-box; font-size: 20px; color: #333;">本地库与远程库</h4>
+<ol style="line-height: 160%; box-sizing: content-box; display: block; padding-left: 30px; margin: 6px 0 10px; color: #333; list-style-type: decimal;">
+<li style="line-height: 160%; box-sizing: content-box;">
+<p style="line-height: 160%; box-sizing: content-box; margin: 10px 0; color: #333;">团队内部协作<br/>
+<img src="版本控制与git简介_files/Image [5].png" type="image/png" data-filename="Image.png"/></p>
+</li>
+<li style="line-height: 160%; box-sizing: content-box;">
+<p style="line-height: 160%; box-sizing: content-box; margin: 10px 0; color: #333;">跨团队协作<br/>
+<img src="版本控制与git简介_files/Image [6].png" type="image/png" data-filename="Image.png"/></p>
+</li>
+</ol>
+</div><center style="display:none !important;visibility:collapse !important;height:0 !important;white-space:nowrap;width:100%;overflow:hidden">%5BTOC%5D%0A%23%20%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%85%B7%E5%BA%94%E8%AF%A5%E5%85%B7%E5%A4%87%E7%9A%84%E5%8A%9F%E8%83%BD%0A*%20**%E5%8D%8F%E5%90%8C%E4%BF%AE%E6%94%B9**%0A%20%20%20%20*%20%E5%A4%9A%E4%BA%BA%E5%B9%B6%E8%A1%8C%E4%B8%8D%E6%82%96%E7%9A%84%E4%BF%AE%E6%94%B9%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%E7%9A%84%E5%90%8C%E4%B8%80%E4%B8%AA%E6%96%87%E4%BB%B6%E3%80%82%20%0A*%20**%E6%95%B0%E6%8D%AE%E5%A4%87%E4%BB%BD**%0A%20%20%20%20*%20%20%E4%B8%8D%E4%BB%85%E4%BF%9D%E5%AD%98%E7%9B%AE%E5%BD%95%E5%92%8C%E6%96%87%E4%BB%B6%E7%9A%84%E5%BD%93%E5%89%8D%E7%8A%B6%E6%80%81%EF%BC%8C%E8%BF%98%E8%83%BD%E5%A4%9F%E4%BF%9D%E5%AD%98%E6%AF%8F%E4%B8%80%E4%B8%AA%E6%8F%90%E4%BA%A4%E8%BF%87%E7%9A%84%E5%8E%86%E5%8F%B2%E7%8A%B6%E6%80%81%E3%80%82%0A*%20%20**%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86**%0A%20%20%20%20*%20%20%E5%9C%A8%E4%BF%9D%E5%AD%98%E6%AF%8F%E4%B8%80%E4%B8%AA%E7%89%88%E6%9C%AC%E7%9A%84%E6%96%87%E4%BB%B6%E4%BF%A1%E6%81%AF%E7%9A%84%E6%97%B6%E5%80%99%E8%A6%81%E5%81%9A%E5%88%B0%E4%B8%8D%E4%BF%9D%E5%AD%98%E9%87%8D%E5%A4%8D%E6%95%B0%E6%8D%AE%EF%BC%8C%E4%BB%A5%E8%8A%82%E7%BA%A6%E5%AD%98%E5%82%A8%E7%A9%BA%20%E9%97%B4%EF%BC%8C%E6%8F%90%E9%AB%98%E8%BF%90%E8%A1%8C%E6%95%88%E7%8E%87%E3%80%82%E8%BF%99%E6%96%B9%E9%9D%A2%20SVN%20%E9%87%87%E7%94%A8%E7%9A%84%E6%98%AF%E5%A2%9E%E9%87%8F%E5%BC%8F%E7%AE%A1%E7%90%86%E7%9A%84%E6%96%B9%E5%BC%8F%EF%BC%8C%E8%80%8C%20Git%20%E9%87%87%E5%8F%96%E4%BA%86%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%BF%AB%E7%85%A7%E7%9A%84%E6%96%B9%E5%BC%8F%E3%80%82%0A*%20%20%E6%9D%83%E9%99%90%E6%8E%A7%E5%88%B6%0A%20%20%20%20*%20%20%E5%AF%B9%E5%9B%A2%E9%98%9F%E4%B8%AD%E5%8F%82%E4%B8%8E%E5%BC%80%E5%8F%91%E7%9A%84%E4%BA%BA%E5%91%98%E8%BF%9B%E8%A1%8C%E6%9D%83%E9%99%90%E6%8E%A7%E5%88%B6%E3%80%82%20%0A%20%20%20%20*%20%20%E5%AF%B9%E5%9B%A2%E9%98%9F%E5%A4%96%E5%BC%80%E5%8F%91%E8%80%85%E8%B4%A1%E7%8C%AE%E7%9A%84%E4%BB%A3%E7%A0%81%E8%BF%9B%E8%A1%8C%E5%AE%A1%E6%A0%B8%E2%80%94%E2%80%94Git%20%E7%8B%AC%E6%9C%89%E3%80%82%20%0A*%20%20%E5%88%86%E6%94%AF%E7%AE%A1%E7%90%86%0A%20%20%20%20*%20%20%E5%85%81%E8%AE%B8%E5%BC%80%E5%8F%91%E5%9B%A2%E9%98%9F%E5%9C%A8%E5%B7%A5%E4%BD%9C%E8%BF%87%E7%A8%8B%E4%B8%AD%E5%A4%9A%E6%9D%A1%E7%94%9F%E4%BA%A7%E7%BA%BF%E5%90%8C%E6%97%B6%E6%8E%A8%E8%BF%9B%E4%BB%BB%E5%8A%A1%EF%BC%8C%E8%BF%9B%E4%B8%80%E6%AD%A5%E6%8F%90%E9%AB%98%E6%95%88%E7%8E%87%E3%80%82%0A%0A%23%23%20%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E7%AE%80%E4%BB%8B%0A%0A%23%23%23%23%20%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%0A%E5%B7%A5%E7%A8%8B%E8%AE%BE%E8%AE%A1%E9%A2%86%E5%9F%9F%E4%B8%AD%E4%BD%BF%E7%94%A8%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E7%AE%A1%E7%90%86%E5%B7%A5%E7%A8%8B%E8%93%9D%E5%9B%BE%E7%9A%84%E8%AE%BE%E8%AE%A1%E8%BF%87%E7%A8%8B%E3%80%82%E5%9C%A8%20IT%20%E5%BC%80%E5%8F%91%E8%BF%87%E7%A8%8B%E4%B8%AD%E4%B9%9F%E5%8F%AF%E4%BB%A5%20%E4%BD%BF%E7%94%A8%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E6%80%9D%E6%83%B3%E7%AE%A1%E7%90%86%E4%BB%A3%E7%A0%81%E7%9A%84%E7%89%88%E6%9C%AC%E8%BF%AD%E4%BB%A3%E3%80%82%0A%0A%23%23%23%23%20%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7%0A%0A*%20%E9%9B%86%E4%B8%AD%E5%BC%8F%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7%EF%BC%9ACVS%E3%80%81SVN%E3%80%81VSS%E2%80%A6%E2%80%A6%0A!%5Be6e07799ada30d84770070d0be56a854.png%5D(en-resource%3A%2F%2Fdatabase%2F3001%3A1)%0A*%20%E5%88%86%E5%B8%83%E5%BC%8F%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7%EF%BC%9A%20Git%E3%80%81Mercurial%E3%80%81Bazaar%E3%80%81Darcs%E2%80%A6%E2%80%A6%0A!%5Bb36414fc7947723c71e76d42756bbb36.png%5D(en-resource%3A%2F%2Fdatabase%2F3003%3A1)%0A%0A%0A%23%20Git%20%E7%AE%80%E4%BB%8B%0A%23%23%23%23%20Git%E7%AE%80%E4%BB%8B%0A!%5Bb9943d8539628bbebec868961fda6ff0.png%5D(en-resource%3A%2F%2Fdatabase%2F3005%3A1)%0A%0A%23%23%23%23%20Git%E5%AE%98%E7%BD%91%E5%92%8C%20Logo%20%0A%E5%AE%98%E7%BD%91%E5%9C%B0%E5%9D%80%EF%BC%9Ahttps%3A%2F%2Fgit-scm.com%2F%0A!%5B17ba557f5085fcd1f03ebd0aa8df82c7.png%5D(en-resource%3A%2F%2Fdatabase%2F3007%3A1)%0A%0A%23%23%23%23%20Git%E7%9A%84%E4%BC%98%E5%8A%BF%0A%0A*%20%E5%A4%A7%E9%83%A8%E5%88%86%E6%93%8D%E4%BD%9C%E5%9C%A8%E6%9C%AC%E5%9C%B0%E5%AE%8C%E6%88%90%EF%BC%8C%E4%B8%8D%E9%9C%80%E8%A6%81%E8%81%94%E7%BD%91%0A*%20%E5%AE%8C%E6%95%B4%E6%80%A7%E4%BF%9D%E8%AF%81%0A*%20%E5%B0%BD%E5%8F%AF%E8%83%BD%E6%B7%BB%E5%8A%A0%E6%95%B0%E6%8D%AE%E8%80%8C%E4%B8%8D%E6%98%AF%E5%88%A0%E9%99%A4%E6%88%96%E4%BF%AE%E6%94%B9%E6%95%B0%E6%8D%AE%0A*%20%E5%88%86%E6%94%AF%E6%93%8D%E4%BD%9C%E9%9D%9E%E5%B8%B8%E5%BF%AB%E6%8D%B7%E6%B5%81%E7%95%85%0A*%20%E4%B8%8E%20Linux%20%E5%91%BD%E4%BB%A4%E5%85%A8%E9%9D%A2%E5%85%BC%E5%AE%B9%0A%0A%23%23%23%23%20Git%20%E7%BB%93%E6%9E%84%0A!%5Bf8be77970c7e7a1b7f39c86e7429dba2.png%5D(en-resource%3A%2F%2Fdatabase%2F3051%3A1)%0A%0A%23%23%23%23%20Git%E5%92%8C%E4%BB%A3%E7%A0%81%E6%89%98%E7%AE%A1%E4%B8%AD%E5%BF%83%0A%E4%BB%A3%E7%A0%81%E6%89%98%E7%AE%A1%E4%B8%AD%E5%BF%83%E7%9A%84%E4%BB%BB%E5%8A%A1%EF%BC%9A%E7%BB%B4%E6%8A%A4%E8%BF%9C%E7%A8%8B%E5%BA%93%0A*%20**%E5%B1%80%E5%9F%9F%E7%BD%91%E7%8E%AF%E5%A2%83%E4%B8%8B**%0A%20%20%20%20*%20GitLab%20%E6%9C%8D%E5%8A%A1%E5%99%A8%20%0A*%20**%E5%A4%96%E7%BD%91%E7%8E%AF%E5%A2%83%E4%B8%8B**%0A%20%20%20%20*%20GitHub%0A%20%20%20%20*%20%E7%A0%81%E4%BA%91%0A%0A%23%23%23%23%20%E6%9C%AC%E5%9C%B0%E5%BA%93%E4%B8%8E%E8%BF%9C%E7%A8%8B%E5%BA%93%0A%0A1.%20%E5%9B%A2%E9%98%9F%E5%86%85%E9%83%A8%E5%8D%8F%E4%BD%9C%0A!%5B8dce8f4b8857d205e054ddc58d92d987.png%5D(en-resource%3A%2F%2Fdatabase%2F3053%3A1)%0A%0A2.%20%E8%B7%A8%E5%9B%A2%E9%98%9F%E5%8D%8F%E4%BD%9C%0A!%5Bd3df5ba8233b03c14f3810e357bfb6ec.png%5D(en-resource%3A%2F%2Fdatabase%2F3055%3A0)%0A</center></span>
+</div></body></html> 
