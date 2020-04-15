@@ -1,0 +1,85 @@
+<html>
+<head>
+  <title>Git 基本原理以及Git工作流</title>
+  <basefont face="微软雅黑" size="2" />
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  <meta name="exporter-version" content="YXBJ Windows/601535 (zh-CN, DDL); Windows/10.0.0 (Win64); EDAMVersion=V2;"/>
+  <meta name="content-class" content="yinxiang.markdown"/>
+  <style>
+    body, td {
+      font-family: 微软雅黑;
+      font-size: 10pt;
+    }
+  </style>
+</head>
+<body>
+<a name="3121"/>
+<h1>Git 基本原理以及Git工作流</h1>
+
+<div><span><div style="font-size: 14px; margin: 0; padding: 0; width: 100%;"><div style="line-height: 160%; box-sizing: content-box;"><ul style="line-height: 160%; box-sizing: content-box; display: block; list-style-type: disc; padding-left: 30px; margin: 6px 0 10px; color: #333;"><li style="line-height: 160%; box-sizing: content-box; position: relative;"><a style="line-height: 160%; box-sizing: content-box; text-decoration: underline; color: #5286bc;">哈希
+</a></li><li style="line-height: 160%; box-sizing: content-box; position: relative;"><a style="line-height: 160%; box-sizing: content-box; text-decoration: underline; color: #5286bc;">Git保存版本的机制
+</a><ul style="line-height: 160%; box-sizing: content-box; display: block; list-style-type: disc; padding-left: 30px; margin: 6px 0 10px; color: #333; margin-top: 0; margin-bottom: 0;"><li style="line-height: 160%; box-sizing: content-box; position: relative;"><a style="line-height: 160%; box-sizing: content-box; text-decoration: underline; color: #5286bc;">集中式版本控制工具的文件管理机制
+</a></li><li style="line-height: 160%; box-sizing: content-box; position: relative;"><a style="line-height: 160%; box-sizing: content-box; text-decoration: underline; color: #5286bc;">Git 的文件管理机制
+</a></li><li style="line-height: 160%; box-sizing: content-box; position: relative;"><a style="line-height: 160%; box-sizing: content-box; text-decoration: underline; color: #5286bc;">Git 文件管理机制细节
+</a></li></ul></li><li style="line-height: 160%; box-sizing: content-box; position: relative;"><a style="line-height: 160%; box-sizing: content-box; text-decoration: underline; color: #5286bc;">Git 分支管理机制
+</a><ul style="line-height: 160%; box-sizing: content-box; display: block; list-style-type: disc; padding-left: 30px; margin: 6px 0 10px; color: #333; margin-top: 0; margin-bottom: 0;"><li style="line-height: 160%; box-sizing: content-box; position: relative;"><a style="line-height: 160%; box-sizing: content-box; text-decoration: underline; color: #5286bc;">分支的创建
+</a></li><li style="line-height: 160%; box-sizing: content-box; position: relative;"><a style="line-height: 160%; box-sizing: content-box; text-decoration: underline; color: #5286bc;">分支的切换
+</a></li></ul></li><li style="line-height: 160%; box-sizing: content-box; position: relative;"><a style="line-height: 160%; box-sizing: content-box; text-decoration: underline; color: #5286bc;">GitFlow 工作流
+</a><ul style="line-height: 160%; box-sizing: content-box; display: block; list-style-type: disc; padding-left: 30px; margin: 6px 0 10px; color: #333; margin-top: 0; margin-bottom: 0;"><li style="line-height: 160%; box-sizing: content-box; position: relative;"><a style="line-height: 160%; box-sizing: content-box; text-decoration: underline; color: #5286bc;">分支种类
+</a></li><li style="line-height: 160%; box-sizing: content-box; position: relative;"><a style="line-height: 160%; box-sizing: content-box; text-decoration: underline; color: #5286bc;">Git 工作流举例
+</a></li></ul></li></ul></div><h2 style="line-height: 160%; box-sizing: content-box; font-weight: 700; font-size: 34px; border-bottom: 1px solid #dbdbdb; color: #333;">哈希</h2>
+<p style="line-height: 160%; box-sizing: content-box; margin: 10px 0; color: #333;"><img src="Git 基本原理以及Git工作流_files/Image.png" type="image/png" data-filename="Image.png"/><br/>
+哈希是一个系列的加密算法，各个不同的哈希算法虽然加密强度不同，但是有以下几个共同点：<br/>
+1.不管输入数据的数据量有多大，输入同一个哈希算法，得到的加密结果长度固定。<br/>
+2.哈希算法确定，输入数据确定，输出数据能够保证不变<br/>
+3.哈希算法确定，输入数据有变化，输出数据一定有变化，而且通常变化很大<br/>
+4.哈希算法不可逆<br/>
+Git 底层采用的是 SHA-1 算法。<br/>
+哈希算法可以被用来验证文件。原理如下图所示：<br/>
+<img src="Git 基本原理以及Git工作流_files/Image [1].png" type="image/png" data-filename="Image.png"/><br/>
+Git 就是靠这种机制来从根本上保证数据完整性的</p>
+<h2 style="line-height: 160%; box-sizing: content-box; font-weight: 700; font-size: 34px; border-bottom: 1px solid #dbdbdb; color: #333;">Git保存版本的机制</h2>
+<h4 style="line-height: 160%; box-sizing: content-box; font-size: 20px; color: #333;">集中式版本控制工具的文件管理机制</h4>
+<p style="line-height: 160%; box-sizing: content-box; margin: 10px 0; color: #333;">以文件变更列表的方式存储信息。这类系统将它们保存的信息看作是一组基本 文件和每个文件随时间逐步累积的差异。<br/>
+<img src="Git 基本原理以及Git工作流_files/Image [2].png" type="image/png" data-filename="Image.png"/></p>
+<h4 style="line-height: 160%; box-sizing: content-box; font-size: 20px; color: #333;">Git 的文件管理机制</h4>
+<p style="line-height: 160%; box-sizing: content-box; margin: 10px 0; color: #333;">Git 把数据看作是小型文件系统的一组快照。每次提交更新时 Git 都会对当前 的全部文件制作一个快照并保存这个快照的索引。为了高效，如果文件没有修改， Git 不再重新存储该文件，而是只保留一个链接指向之前存储的文件。所以 Git 的 工作方式可以称之为快照流。<br/>
+<img src="Git 基本原理以及Git工作流_files/Image [3].png" type="image/png" data-filename="Image.png"/><br/>
+文件未作修改时，当前位置存放的是上个版本的指针。</p>
+<h4 style="line-height: 160%; box-sizing: content-box; font-size: 20px; color: #333;">Git 文件管理机制细节</h4>
+<ul style="line-height: 160%; box-sizing: content-box; display: block; list-style-type: disc; padding-left: 30px; margin: 6px 0 10px; color: #333;">
+<li style="line-height: 160%; box-sizing: content-box; position: relative;">
+<p style="line-height: 160%; box-sizing: content-box; color: #333; margin: 0;">Git 的“提交对象<br/>
+<img src="Git 基本原理以及Git工作流_files/Image [4].png" type="image/png" data-filename="Image.png"/></p>
+</li>
+<li style="line-height: 160%; box-sizing: content-box; position: relative;">
+<p style="line-height: 160%; box-sizing: content-box; color: #333; margin: 0;">提交对象及其父对象形成的链条<br/>
+<img src="Git 基本原理以及Git工作流_files/Image [5].png" type="image/png" data-filename="Image.png"/></p>
+</li>
+</ul>
+<h2 style="line-height: 160%; box-sizing: content-box; font-weight: 700; font-size: 34px; border-bottom: 1px solid #dbdbdb; color: #333;">Git 分支管理机制</h2>
+<h4 style="line-height: 160%; box-sizing: content-box; font-size: 20px; color: #333;">分支的创建</h4>
+<p style="line-height: 160%; box-sizing: content-box; margin: 10px 0; color: #333;"><img src="Git 基本原理以及Git工作流_files/Image [6].png" type="image/png" data-filename="Image.png"/></p>
+<h4 style="line-height: 160%; box-sizing: content-box; font-size: 20px; color: #333;">分支的切换</h4>
+<p style="line-height: 160%; box-sizing: content-box; margin: 10px 0; color: #333;"><img src="Git 基本原理以及Git工作流_files/Image [7].png" type="image/png" data-filename="Image.png"/><br/>
+<img src="Git 基本原理以及Git工作流_files/Image [8].png" type="image/png" data-filename="Image.png"/><br/>
+<img src="Git 基本原理以及Git工作流_files/Image [9].png" type="image/png" data-filename="Image.png"/><br/>
+<img src="Git 基本原理以及Git工作流_files/Image [10].png" type="image/png" data-filename="Image.png"/></p>
+<h2 style="line-height: 160%; box-sizing: content-box; font-weight: 700; font-size: 34px; border-bottom: 1px solid #dbdbdb; color: #333;">GitFlow 工作流</h2>
+<h4 style="line-height: 160%; box-sizing: content-box; font-size: 20px; color: #333;">分支种类</h4>
+<ul style="line-height: 160%; box-sizing: content-box; display: block; list-style-type: disc; padding-left: 30px; margin: 6px 0 10px; color: #333;">
+<li style="line-height: 160%; box-sizing: content-box; position: relative;">主干分支 master<br/>
+主要负责管理正在运行的生产环境代码。永远保持与正在运行的生产环境完全一致。</li>
+<li style="line-height: 160%; box-sizing: content-box; position: relative;">开发分支 develop<br/>
+主要负责管理正在开发过程中的代码。一般情况下应该是最新的代码。</li>
+<li style="line-height: 160%; box-sizing: content-box; position: relative;">bug 修理分支 hotfix<br/>
+主要负责管理生产环境下出现的紧急修复的代码。 从主干分支分出，修理完毕并测试上线后，并回主干分支。并回后，视情况可以删除该分支。</li>
+<li style="line-height: 160%; box-sizing: content-box; position: relative;">准生产分支（预发布分支） release<br/>
+较大的版本上线前，会从开发分支中分出准生产分支，进行最后阶段的集成测试。该版本上线后，会合并到主干分支。生产环境运行一段阶段较稳定后 可以视情况删除。</li>
+<li style="line-height: 160%; box-sizing: content-box; position: relative;">功能分支 feature<br/>
+为了不影响较短周期的开发工作，一般把中长期开发模块，会从开发分支 中独立出来。 开发完成后会合并到开发分支。</li>
+</ul>
+<h4 style="line-height: 160%; box-sizing: content-box; font-size: 20px; color: #333;">Git 工作流举例</h4>
+<p style="line-height: 160%; box-sizing: content-box; margin: 10px 0; color: #333;"><img src="Git 基本原理以及Git工作流_files/Image [11].png" type="image/png" data-filename="Image.png"/></p>
+</div><center style="display:none !important;visibility:collapse !important;height:0 !important;white-space:nowrap;width:100%;overflow:hidden">%5BTOC%5D%0A%0A%23%23%20%E5%93%88%E5%B8%8C%0A!%5B2d9d8f3182b1428f4b07209ecfb0cbaa.png%5D(en-resource%3A%2F%2Fdatabase%2F3123%3A1)%0A%E5%93%88%E5%B8%8C%E6%98%AF%E4%B8%80%E4%B8%AA%E7%B3%BB%E5%88%97%E7%9A%84%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95%EF%BC%8C%E5%90%84%E4%B8%AA%E4%B8%8D%E5%90%8C%E7%9A%84%E5%93%88%E5%B8%8C%E7%AE%97%E6%B3%95%E8%99%BD%E7%84%B6%E5%8A%A0%E5%AF%86%E5%BC%BA%E5%BA%A6%E4%B8%8D%E5%90%8C%EF%BC%8C%E4%BD%86%E6%98%AF%E6%9C%89%E4%BB%A5%E4%B8%8B%E5%87%A0%E4%B8%AA%E5%85%B1%E5%90%8C%E7%82%B9%EF%BC%9A%0A%20%20%20%201.%E4%B8%8D%E7%AE%A1%E8%BE%93%E5%85%A5%E6%95%B0%E6%8D%AE%E7%9A%84%E6%95%B0%E6%8D%AE%E9%87%8F%E6%9C%89%E5%A4%9A%E5%A4%A7%EF%BC%8C%E8%BE%93%E5%85%A5%E5%90%8C%E4%B8%80%E4%B8%AA%E5%93%88%E5%B8%8C%E7%AE%97%E6%B3%95%EF%BC%8C%E5%BE%97%E5%88%B0%E7%9A%84%E5%8A%A0%E5%AF%86%E7%BB%93%E6%9E%9C%E9%95%BF%E5%BA%A6%E5%9B%BA%E5%AE%9A%E3%80%82%0A%20%20%20%202.%E5%93%88%E5%B8%8C%E7%AE%97%E6%B3%95%E7%A1%AE%E5%AE%9A%EF%BC%8C%E8%BE%93%E5%85%A5%E6%95%B0%E6%8D%AE%E7%A1%AE%E5%AE%9A%EF%BC%8C%E8%BE%93%E5%87%BA%E6%95%B0%E6%8D%AE%E8%83%BD%E5%A4%9F%E4%BF%9D%E8%AF%81%E4%B8%8D%E5%8F%98%0A%20%20%20%203.%E5%93%88%E5%B8%8C%E7%AE%97%E6%B3%95%E7%A1%AE%E5%AE%9A%EF%BC%8C%E8%BE%93%E5%85%A5%E6%95%B0%E6%8D%AE%E6%9C%89%E5%8F%98%E5%8C%96%EF%BC%8C%E8%BE%93%E5%87%BA%E6%95%B0%E6%8D%AE%E4%B8%80%E5%AE%9A%E6%9C%89%E5%8F%98%E5%8C%96%EF%BC%8C%E8%80%8C%E4%B8%94%E9%80%9A%E5%B8%B8%E5%8F%98%E5%8C%96%E5%BE%88%E5%A4%A7%0A%20%20%20%204.%E5%93%88%E5%B8%8C%E7%AE%97%E6%B3%95%E4%B8%8D%E5%8F%AF%E9%80%86%20%0AGit%20%E5%BA%95%E5%B1%82%E9%87%87%E7%94%A8%E7%9A%84%E6%98%AF%20SHA-1%20%E7%AE%97%E6%B3%95%E3%80%82%20%0A%E5%93%88%E5%B8%8C%E7%AE%97%E6%B3%95%E5%8F%AF%E4%BB%A5%E8%A2%AB%E7%94%A8%E6%9D%A5%E9%AA%8C%E8%AF%81%E6%96%87%E4%BB%B6%E3%80%82%E5%8E%9F%E7%90%86%E5%A6%82%E4%B8%8B%E5%9B%BE%E6%89%80%E7%A4%BA%EF%BC%9A%0A!%5B1183b48f57a6f9c7bbea5a0f09d959f2.png%5D(en-resource%3A%2F%2Fdatabase%2F3125%3A1)%0AGit%20%E5%B0%B1%E6%98%AF%E9%9D%A0%E8%BF%99%E7%A7%8D%E6%9C%BA%E5%88%B6%E6%9D%A5%E4%BB%8E%E6%A0%B9%E6%9C%AC%E4%B8%8A%E4%BF%9D%E8%AF%81%E6%95%B0%E6%8D%AE%E5%AE%8C%E6%95%B4%E6%80%A7%E7%9A%84%0A%0A%23%23%20Git%E4%BF%9D%E5%AD%98%E7%89%88%E6%9C%AC%E7%9A%84%E6%9C%BA%E5%88%B6%0A%23%23%23%23%20%E9%9B%86%E4%B8%AD%E5%BC%8F%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7%E7%9A%84%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E6%9C%BA%E5%88%B6%0A%E4%BB%A5%E6%96%87%E4%BB%B6%E5%8F%98%E6%9B%B4%E5%88%97%E8%A1%A8%E7%9A%84%E6%96%B9%E5%BC%8F%E5%AD%98%E5%82%A8%E4%BF%A1%E6%81%AF%E3%80%82%E8%BF%99%E7%B1%BB%E7%B3%BB%E7%BB%9F%E5%B0%86%E5%AE%83%E4%BB%AC%E4%BF%9D%E5%AD%98%E7%9A%84%E4%BF%A1%E6%81%AF%E7%9C%8B%E4%BD%9C%E6%98%AF%E4%B8%80%E7%BB%84%E5%9F%BA%E6%9C%AC%20%E6%96%87%E4%BB%B6%E5%92%8C%E6%AF%8F%E4%B8%AA%E6%96%87%E4%BB%B6%E9%9A%8F%E6%97%B6%E9%97%B4%E9%80%90%E6%AD%A5%E7%B4%AF%E7%A7%AF%E7%9A%84%E5%B7%AE%E5%BC%82%E3%80%82%0A!%5Ba3c738e05fafe62764cc242a1695b839.png%5D(en-resource%3A%2F%2Fdatabase%2F3127%3A1)%0A%23%23%23%23%20Git%20%E7%9A%84%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E6%9C%BA%E5%88%B6%0AGit%20%E6%8A%8A%E6%95%B0%E6%8D%AE%E7%9C%8B%E4%BD%9C%E6%98%AF%E5%B0%8F%E5%9E%8B%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E7%9A%84%E4%B8%80%E7%BB%84%E5%BF%AB%E7%85%A7%E3%80%82%E6%AF%8F%E6%AC%A1%E6%8F%90%E4%BA%A4%E6%9B%B4%E6%96%B0%E6%97%B6%20Git%20%E9%83%BD%E4%BC%9A%E5%AF%B9%E5%BD%93%E5%89%8D%20%E7%9A%84%E5%85%A8%E9%83%A8%E6%96%87%E4%BB%B6%E5%88%B6%E4%BD%9C%E4%B8%80%E4%B8%AA%E5%BF%AB%E7%85%A7%E5%B9%B6%E4%BF%9D%E5%AD%98%E8%BF%99%E4%B8%AA%E5%BF%AB%E7%85%A7%E7%9A%84%E7%B4%A2%E5%BC%95%E3%80%82%E4%B8%BA%E4%BA%86%E9%AB%98%E6%95%88%EF%BC%8C%E5%A6%82%E6%9E%9C%E6%96%87%E4%BB%B6%E6%B2%A1%E6%9C%89%E4%BF%AE%E6%94%B9%EF%BC%8C%20Git%20%E4%B8%8D%E5%86%8D%E9%87%8D%E6%96%B0%E5%AD%98%E5%82%A8%E8%AF%A5%E6%96%87%E4%BB%B6%EF%BC%8C%E8%80%8C%E6%98%AF%E5%8F%AA%E4%BF%9D%E7%95%99%E4%B8%80%E4%B8%AA%E9%93%BE%E6%8E%A5%E6%8C%87%E5%90%91%E4%B9%8B%E5%89%8D%E5%AD%98%E5%82%A8%E7%9A%84%E6%96%87%E4%BB%B6%E3%80%82%E6%89%80%E4%BB%A5%20Git%20%E7%9A%84%20%E5%B7%A5%E4%BD%9C%E6%96%B9%E5%BC%8F%E5%8F%AF%E4%BB%A5%E7%A7%B0%E4%B9%8B%E4%B8%BA%E5%BF%AB%E7%85%A7%E6%B5%81%E3%80%82%0A!%5B8da3a2b9fb59aa1d60000f6812f40379.png%5D(en-resource%3A%2F%2Fdatabase%2F3129%3A1)%0A%E6%96%87%E4%BB%B6%E6%9C%AA%E4%BD%9C%E4%BF%AE%E6%94%B9%E6%97%B6%EF%BC%8C%E5%BD%93%E5%89%8D%E4%BD%8D%E7%BD%AE%E5%AD%98%E6%94%BE%E7%9A%84%E6%98%AF%E4%B8%8A%E4%B8%AA%E7%89%88%E6%9C%AC%E7%9A%84%E6%8C%87%E9%92%88%E3%80%82%0A%0A%23%23%23%23%20Git%20%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E6%9C%BA%E5%88%B6%E7%BB%86%E8%8A%82%0A%0A*%20Git%20%E7%9A%84%E2%80%9C%E6%8F%90%E4%BA%A4%E5%AF%B9%E8%B1%A1%0A!%5B20d1e025e97a61705a47170623d537dd.png%5D(en-resource%3A%2F%2Fdatabase%2F3133%3A1)%0A%0A*%20%E6%8F%90%E4%BA%A4%E5%AF%B9%E8%B1%A1%E5%8F%8A%E5%85%B6%E7%88%B6%E5%AF%B9%E8%B1%A1%E5%BD%A2%E6%88%90%E7%9A%84%E9%93%BE%E6%9D%A1%0A!%5B69ea8e8a410803b027cbec8911298cea.png%5D(en-resource%3A%2F%2Fdatabase%2F3135%3A1)%0A%0A%23%23%20Git%20%E5%88%86%E6%94%AF%E7%AE%A1%E7%90%86%E6%9C%BA%E5%88%B6%0A%23%23%23%23%20%E5%88%86%E6%94%AF%E7%9A%84%E5%88%9B%E5%BB%BA%0A!%5Bd35c46dcafb772a7ac80b53cd9edcb4c.png%5D(en-resource%3A%2F%2Fdatabase%2F3137%3A1)%0A%0A%23%23%23%23%20%E5%88%86%E6%94%AF%E7%9A%84%E5%88%87%E6%8D%A2%0A!%5B4b494166affe04cff09919ee748aad80.png%5D(en-resource%3A%2F%2Fdatabase%2F3139%3A1)%0A!%5B62fbe87691aedc263de25317e7af15c4.png%5D(en-resource%3A%2F%2Fdatabase%2F3141%3A1)%0A!%5Bc70f1a50603df9459205946489ccf08e.png%5D(en-resource%3A%2F%2Fdatabase%2F3143%3A1)%0A!%5B1c6367ced98efb8c08475f1f38e2c8f1.png%5D(en-resource%3A%2F%2Fdatabase%2F3145%3A1)%0A%0A%0A%23%23%20GitFlow%20%E5%B7%A5%E4%BD%9C%E6%B5%81%0A%0A%23%23%23%23%20%E5%88%86%E6%94%AF%E7%A7%8D%E7%B1%BB%0A%0A*%20%E4%B8%BB%E5%B9%B2%E5%88%86%E6%94%AF%20master%0A%E4%B8%BB%E8%A6%81%E8%B4%9F%E8%B4%A3%E7%AE%A1%E7%90%86%E6%AD%A3%E5%9C%A8%E8%BF%90%E8%A1%8C%E7%9A%84%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83%E4%BB%A3%E7%A0%81%E3%80%82%E6%B0%B8%E8%BF%9C%E4%BF%9D%E6%8C%81%E4%B8%8E%E6%AD%A3%E5%9C%A8%E8%BF%90%E8%A1%8C%E7%9A%84%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83%E5%AE%8C%E5%85%A8%E4%B8%80%E8%87%B4%E3%80%82%0A*%20%E5%BC%80%E5%8F%91%E5%88%86%E6%94%AF%20develop%0A%E4%B8%BB%E8%A6%81%E8%B4%9F%E8%B4%A3%E7%AE%A1%E7%90%86%E6%AD%A3%E5%9C%A8%E5%BC%80%E5%8F%91%E8%BF%87%E7%A8%8B%E4%B8%AD%E7%9A%84%E4%BB%A3%E7%A0%81%E3%80%82%E4%B8%80%E8%88%AC%E6%83%85%E5%86%B5%E4%B8%8B%E5%BA%94%E8%AF%A5%E6%98%AF%E6%9C%80%E6%96%B0%E7%9A%84%E4%BB%A3%E7%A0%81%E3%80%82%0A*%20bug%20%E4%BF%AE%E7%90%86%E5%88%86%E6%94%AF%20hotfix%20%0A%E4%B8%BB%E8%A6%81%E8%B4%9F%E8%B4%A3%E7%AE%A1%E7%90%86%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83%E4%B8%8B%E5%87%BA%E7%8E%B0%E7%9A%84%E7%B4%A7%E6%80%A5%E4%BF%AE%E5%A4%8D%E7%9A%84%E4%BB%A3%E7%A0%81%E3%80%82%20%E4%BB%8E%E4%B8%BB%E5%B9%B2%E5%88%86%E6%94%AF%E5%88%86%E5%87%BA%EF%BC%8C%E4%BF%AE%E7%90%86%E5%AE%8C%E6%AF%95%E5%B9%B6%E6%B5%8B%E8%AF%95%E4%B8%8A%E7%BA%BF%E5%90%8E%EF%BC%8C%E5%B9%B6%E5%9B%9E%E4%B8%BB%E5%B9%B2%E5%88%86%E6%94%AF%E3%80%82%E5%B9%B6%E5%9B%9E%E5%90%8E%EF%BC%8C%E8%A7%86%E6%83%85%E5%86%B5%E5%8F%AF%E4%BB%A5%E5%88%A0%E9%99%A4%E8%AF%A5%E5%88%86%E6%94%AF%E3%80%82%0A*%20%E5%87%86%E7%94%9F%E4%BA%A7%E5%88%86%E6%94%AF%EF%BC%88%E9%A2%84%E5%8F%91%E5%B8%83%E5%88%86%E6%94%AF%EF%BC%89%20release%0A%E8%BE%83%E5%A4%A7%E7%9A%84%E7%89%88%E6%9C%AC%E4%B8%8A%E7%BA%BF%E5%89%8D%EF%BC%8C%E4%BC%9A%E4%BB%8E%E5%BC%80%E5%8F%91%E5%88%86%E6%94%AF%E4%B8%AD%E5%88%86%E5%87%BA%E5%87%86%E7%94%9F%E4%BA%A7%E5%88%86%E6%94%AF%EF%BC%8C%E8%BF%9B%E8%A1%8C%E6%9C%80%E5%90%8E%E9%98%B6%E6%AE%B5%E7%9A%84%E9%9B%86%E6%88%90%E6%B5%8B%E8%AF%95%E3%80%82%E8%AF%A5%E7%89%88%E6%9C%AC%E4%B8%8A%E7%BA%BF%E5%90%8E%EF%BC%8C%E4%BC%9A%E5%90%88%E5%B9%B6%E5%88%B0%E4%B8%BB%E5%B9%B2%E5%88%86%E6%94%AF%E3%80%82%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83%E8%BF%90%E8%A1%8C%E4%B8%80%E6%AE%B5%E9%98%B6%E6%AE%B5%E8%BE%83%E7%A8%B3%E5%AE%9A%E5%90%8E%20%E5%8F%AF%E4%BB%A5%E8%A7%86%E6%83%85%E5%86%B5%E5%88%A0%E9%99%A4%E3%80%82%0A*%20%E5%8A%9F%E8%83%BD%E5%88%86%E6%94%AF%20feature%20%0A%E4%B8%BA%E4%BA%86%E4%B8%8D%E5%BD%B1%E5%93%8D%E8%BE%83%E7%9F%AD%E5%91%A8%E6%9C%9F%E7%9A%84%E5%BC%80%E5%8F%91%E5%B7%A5%E4%BD%9C%EF%BC%8C%E4%B8%80%E8%88%AC%E6%8A%8A%E4%B8%AD%E9%95%BF%E6%9C%9F%E5%BC%80%E5%8F%91%E6%A8%A1%E5%9D%97%EF%BC%8C%E4%BC%9A%E4%BB%8E%E5%BC%80%E5%8F%91%E5%88%86%E6%94%AF%20%E4%B8%AD%E7%8B%AC%E7%AB%8B%E5%87%BA%E6%9D%A5%E3%80%82%20%E5%BC%80%E5%8F%91%E5%AE%8C%E6%88%90%E5%90%8E%E4%BC%9A%E5%90%88%E5%B9%B6%E5%88%B0%E5%BC%80%E5%8F%91%E5%88%86%E6%94%AF%E3%80%82%0A%0A%23%23%23%23%20Git%20%E5%B7%A5%E4%BD%9C%E6%B5%81%E4%B8%BE%E4%BE%8B%0A!%5Bb2597d8bb39e3be5daf34c3618012aca.png%5D(en-resource%3A%2F%2Fdatabase%2F3284%3A0)%0A</center></span>
+</div></body></html> 
